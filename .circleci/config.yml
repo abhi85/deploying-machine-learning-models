@@ -97,6 +97,10 @@ workflows:
           requires:
             - test_regression_model
             - test_ml_api
+
+      - test_ml_api:
+          requires:
+            - test_regression_model
           # filters:
           #   branches:
           #     only:

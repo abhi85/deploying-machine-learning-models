@@ -54,7 +54,6 @@ jobs:
       - run:
           name: Runnning tests
           command: |
-            virtualenv venv
             . venv/bin/activate
             pip install --upgrade pip
             pip install -r packages/ml_api/requirements.txt
@@ -91,16 +90,15 @@ workflows:
   version: 2
   test-all:
     jobs:
-      - test_regression_model
-      - test_ml_api
-      - train_and_upload_regression_model:
-          requires:
-            - test_regression_model
-            - test_ml_api
-
+      # - test_regression_model
+      - train_and_upload_regression_model
       - test_ml_api:
           requires:
             - test_regression_model
+
+      - test_regression_model:
+          requires:
+            - train_and_upload_regression_model
           # filters:
           #   branches:
           #     only:
